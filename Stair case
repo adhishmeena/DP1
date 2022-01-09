@@ -1,0 +1,124 @@
+
+
+
+''' Time Complexity : O(n) Space Complexity :O(n) 
+Where 'n' is the total number of steps in a staircase ''' 
+from sys import stdin def staircase(n) :
+ways = [0] * (n + 1) 
+
+#this is our DP array/list of size (n + 1)
+#Base Cases if n == 0 : 
+return 1 
+if n == 1 or n == 2 : 
+return n 
+ways[0] = 1 ways[1] = 1 ways[2] = 2 
+for i in range(3, (n + 1)) :
+ways[i] = ways[i - 1] + ways[i - 2] + ways[i - 3]
+return ways[n] 
+
+#main n = int(stdin.readline().rstrip()) print(staircase(n))
+
+
+/////////////////////////////////////////////////////////////////////////stair case with memoization code//////////////////////////////////////////////////////
+
+import java.util.ArrayList;
+public class Solution {
+   
+    
+    
+    static long count=0;
+    
+    public static long path(int n, long dp[])
+    {
+        if(n<0)
+        {
+            return 0;
+        }
+        if(n==0)
+        {
+            return 1 ;// here this represent that there is one way from root to destinattion
+        }
+        
+        long ans2, ans1, ans3;
+        
+//////////////////////////////////// //////////////////DP for n-1 case////////////////////////////////////         
+             if(n-1>0 && dp[n-1]==-1)
+        {
+            
+            
+          ans1=path(n-1,dp);
+          dp[n-1]=ans1;
+        }
+        else if(n-1>0 && dp[n-1]!=-1)
+        {  // System.out.println(n-2) ;
+            ans1=dp[n-1];
+        }
+        
+        else{
+           ans1=path(n-1,dp);  
+        }
+        
+        // int ans1=path(n-1,dp);
+  //////////////////////////////////// //////////////////DP for n-2 case////////////////////////////////////     
+        if(n-2>0 && dp[n-2]==-1)
+        {
+            
+            
+          ans2=path(n-2,dp);
+          dp[n-2]=ans2;
+        }
+        else if(n-2>0 && dp[n-2]!=-1)
+        {  // System.out.println(n-2) ;
+            ans2=dp[n-2];
+        }
+        
+        else{
+           ans2=path(n-2,dp);  
+        }
+  //////////////////////////  ///////////////////////////DP for n-3 case////////////////////////////////    
+               if(n-3>0 && dp[n-3]==-1)
+        {
+            
+            
+          ans3=path(n-3,dp);
+          dp[n-3]=ans3;
+        }
+        else if(n-3>0 && dp[n-3]!=-1)
+        {  // System.out.println(n-2) ;
+            ans3=dp[n-3];
+        }
+        
+        else{
+           ans3=path(n-3,dp);  
+        }
+        
+        
+        
+         return ans1+ans2+ans3;   
+            
+        
+    }
+    
+	public static long staircase(int n) {
+        
+        long []dp=new long[n+1];
+     //   long k=n;
+        for(int i=0;i<n;i++)
+        {
+            dp[i]=-1;   }
+        
+      
+        
+        
+        long count=path(n,dp);
+          
+        //  for(int i=0;i<n;i++)
+        // {
+        //     System.out.println(dp[i]) 
+        //         ; }
+       return count;
+            
+		//Your code goes here
+	}
+
+}
